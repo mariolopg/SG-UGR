@@ -13,10 +13,10 @@ class MyBox extends THREE.Object3D {
     // Como material se crea uno a partir de un color
     var boxMat = new THREE.MeshPhongMaterial({color: 0xCF0000});
     
-    //* Ya podemos construir el Mesh = geomietría + material
+    //· Ya podemos construir el Mesh = geomietría + material
     var box = new THREE.Mesh (boxGeom, boxMat);
     // Y añadirlo como hijo del Object3D (el this)
-    //* this = raíz del grafo
+    //· this = raíz del grafo
     this.add (box);
     
     // Las geometrías se crean centradas en el origen.
@@ -64,7 +64,8 @@ class MyBox extends THREE.Object3D {
     // Estas lineas son las que añaden los componentes de la interfaz
     // Las tres cifras indican un valor mínimo, un máximo y el incremento
     // El método   listen()   permite que si se cambia el valor de la variable en código, el deslizador de la interfaz se actualice
-    folder.add (this.guiControls, 'sizeX', 0.1, 5.0, 0.1).name ('Tamaño X : ').listen(); //* (valor mínimo, valor máximo, valor de incremento)
+    //· guiControls es un deslizador *CREO*
+    folder.add (this.guiControls, 'sizeX', 0.1, 5.0, 0.5).name ('Tamaño X : ').listen(); //* (valor mínimo, valor máximo, valor de incremento)
     folder.add (this.guiControls, 'sizeY', 0.1, 5.0, 0.1).name ('Tamaño Y : ').listen();
     folder.add (this.guiControls, 'sizeZ', 0.1, 5.0, 0.1).name ('Tamaño Z : ').listen();
     
