@@ -1,4 +1,5 @@
 import * as THREE from '../libs/three.module.js'
+import { geometria } from './box.js'
  
 class Ejercicio2 extends THREE.Object3D {
   constructor(gui,titleGui) {
@@ -7,35 +8,25 @@ class Ejercicio2 extends THREE.Object3D {
     // Se crea la parte de la interfaz que corresponde a la caja
     // Se crea primero porque otros métodos usan las variables que se definen para la interfaz
     this.createGUI(gui,titleGui);
+
+    this.factoriaFiguras = new geometria();
     
     // Un Mesh se compone de geometría y material
-    var coneGeom = new THREE.ConeGeometry (5, 10, 64);
+    this.cone = this.factoriaFiguras.createCone(1, 2, 12);
+    this.box = this.factoriaFiguras.createBox(2, 2, 2);
     // Como material se crea uno a partir de un color
-    var coneMat = new THREE.MeshNormalMaterial();
     
     //· Ya podemos construir el Mesh = geomietría + material
-    var cone = new THREE.Mesh (coneGeom, coneMat);
     // Y añadirlo como hijo del Object3D (el this)
     //· this = raíz del grafo
-    this.add (cone);
+    this.add (this.cone);
+    this.add(this.box)
 
-    var cubeGeom = new THREE.BoxBufferGeometry(5, 5, 5);
-    var cubeMat = new THREE.MeshPhysicalMaterial({color: 0x42a4f5})
-    var cube = new THREE.Mesh(cubeGeom, cubeMat);
-    this.add(cube);
+    this.factoriaFiguras.setRotation(this.cone, 90, 0, 0);
+    this.factoriaFiguras.setPosition(this.cone, 2, 5, 3);
+    this.factoriaFiguras.setPosition(this.box, -3, -3, -3);
 
-    var sphereGeom = new THREE.SphereGeometry(1);
-    var sphereMat = new THREE.MeshPhysicalMaterial({color: 0x42a4f5})
-    var sphere = new THREE.Mesh(sphereGeom, sphereMat);
-    this.add(sphere);
-    
-    // Las geometrías se crean centradas en el origen.
-    // Como queremos que el sistema de referencia esté en la base,
-    // subimos el Mesh de la caja la mitad de su altura
-    cone.position.y = 10;
-    cube.position.y = 2.5;
-    sphere.position.x = 2.5;
-    sphere.position.y = 2.5;
+    this.x = 0.01;
   }
   
   createGUI (gui,titleGui) {
@@ -105,6 +96,11 @@ class Ejercicio2 extends THREE.Object3D {
     this.position.set (this.guiControls.posX,this.guiControls.posY,this.guiControls.posZ);
     this.rotation.set (this.guiControls.rotX,this.guiControls.rotY,this.guiControls.rotZ);
     this.scale.set (this.guiControls.sizeX,this.guiControls.sizeY,this.guiControls.sizeZ);
+
+    this.factoriaFiguras.update(this.cone, this.x, 0.01, 0.01);
+
+    this.x += 0.01;
+
   }
 }
 

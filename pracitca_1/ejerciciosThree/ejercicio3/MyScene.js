@@ -7,9 +7,7 @@ import { TrackballControls } from '../libs/TrackballControls.js'
 import { Stats } from '../libs/stats.module.js'
 
 // Clases de mi proyecto
-
-import { cone } from './cone.js'
-import { box } from './box.js'
+import { revolucion } from './revolucion.js'
 
  
 /// La clase fachada del modelo
@@ -49,13 +47,9 @@ class MyScene extends THREE.Scene {
     // Por último creamos el modelo.
     // El modelo puede incluir su parte de la interfaz gráfica de usuario. Le pasamos la referencia a 
     // la gui y el texto bajo el que se agruparán los controles de la interfaz que añada el modelo.
-    this.conoFigura = new cone();
-    this.cajaFigura = new box();
+    this.revolucionFigura = new revolucion();
     
-    this.add (this.conoFigura);
-    this.add (this.cajaFigura);
-
-    this.cajaFigura.setPosition(6, 6, 6);
+    this.add(this.revolucionFigura);
   }
   
   initStats() {
